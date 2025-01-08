@@ -1,7 +1,7 @@
 import { Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { TeamsService } from '../services/teams.service';
 
-@Controller()
+@Controller('teams')
 export class TeamsController {
     constructor(private readonly teamsService: TeamsService) { }
 
