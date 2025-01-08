@@ -4,6 +4,12 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+enum MatchState {
+  PENDING
+  ONGOING
+  FINISHED
+}
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +17,53 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Team {
+  id        Int       @id @default(autoincrement())
+  name      String
+  abr       String
+  color     String
+  players   Player[]
+  coaches   Coach[]
+  localMatches  Match[] @relation("LocalTeam")
+  visitorMatches Match[] @relation("VisitorTeam")
+  matchesWon     Match[]   @relation("Winner")
+}
+
+model Player {
+  id          Int      @id @default(autoincrement())
+  name        String
+  surnames    String
+  age         Int
+  position    String
+  shirtNumber Int
+  active      Boolean
+  team        Team     @relation(fields: [teamId], references: [id])
+  teamId      Int
+}
+
+model Coach {
+  id        Int     @id @default(autoincrement())
+  name      String
+  surnames  String
+  age       Int
+  position  String
+  team      Team    @relation(fields: [teamId], references: [id])
+  teamId    Int
+}
+
+model Match {
+  id           Int      @id @default(autoincrement())
+  state        MatchState
+  day          DateTime
+  time         DateTime
+  localGoals   Int
+  visitorGoals Int
+  winner       Team?    @relation("Winner", fields: [winnerId], references: [id])
+  winnerId     Int?
+  localTeam    Team     @relation("LocalTeam", fields: [localTeamId], references: [id])
+  localTeamId  Int
+  visitorTeam  Team     @relation("VisitorTeam", fields: [visitorTeamId], references: [id])
+  visitorTeamId Int
 }
