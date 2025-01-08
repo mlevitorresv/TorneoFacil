@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, HttpCode, Post, Put } from '@nestjs/common';
+import { Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { TeamsService } from '../services/teams.service';
 
 @Controller()
@@ -9,8 +9,9 @@ export class TeamsController {
     getAll() {
         return this.teamsService.getAll();
     }
-    getOne(id: number) {
-        return this.teamsService.getOne(id);
+    @Get(':id')
+    getOne( @Param() params ) {
+        return this.teamsService.getOne(params.id);
     }
 
     @Post()
@@ -18,13 +19,13 @@ export class TeamsController {
         return this.teamsService.create();
     }
 
-    @Delete()
-    delete(id: number) {
-        return this.teamsService.delete(id);
+    @Delete(':id')
+    delete( @Param() params ) {
+        return this.teamsService.delete(params.id);
     }
 
-    @Put()
-    update(id: number){
-        return this.teamsService.update(id);
+    @Put(':id')
+    update( @Param() params ){
+        return this.teamsService.update(params.id);
     }
 }
