@@ -2,7 +2,7 @@ import { IsString, IsInt, IsBoolean, Min, Max } from 'class-validator';
 
 
 
-export class CreateMatchDto {
+export class CreatePlayerDto {
     @IsString()
     name: string;
   

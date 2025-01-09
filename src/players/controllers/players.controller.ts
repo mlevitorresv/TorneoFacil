@@ -1,5 +1,7 @@
-import { Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { PlayersService } from '../services/players.service';
+import { CreatePlayerDto } from '../dto/create-player.dto';
+import { UpdatePlayerDto } from '../dto/update-player.dto';
 
 @Controller('players')
 export class PlayersController {
@@ -7,25 +9,25 @@ export class PlayersController {
 
     @Get()
     getAll() {
-        return this.playersService.getAll();
+        return this.playersService.getAll()
     }
     @Get(':id')
     getOne( @Param() params ) {
-        return this.playersService.getOne(params.id);
+        return this.playersService.getOne(parseInt(params.id))
     }
 
     @Post()
-    create() {
-        return this.playersService.create();
+    create(@Body() data: CreatePlayerDto) {
+        return this.playersService.create(data)
     }
 
     @Delete(':id')
     delete( @Param() params ) {
-        return this.playersService.delete(params.id);
+        return this.playersService.delete(parseInt(params.id))
     }
 
     @Put(':id')
-    update( @Param() params ){
-        return this.playersService.update(params.id);
+    update( @Param() params, @Body() data: UpdatePlayerDto ){
+        return this.playersService.update(parseInt(params.id), data)
     }
 }
