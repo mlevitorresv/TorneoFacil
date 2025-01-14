@@ -9,9 +9,6 @@ export class CreateMatchDto {
   @IsDateString()
   day: string;  // Formato de fecha
 
-  @IsDateString()
-  time: string;  // Formato de hora
-
   @IsInt()
   @Min(0)
   localGoals: number;
