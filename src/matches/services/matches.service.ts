@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateMatchDto } from '../dto/create-match.dto';
 import { UpdateMatchDto } from '../dto/update-match.dto';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class MatchesService {
@@ -27,10 +28,11 @@ export class MatchesService {
     })
     return result
   }
-  async create(data: CreateMatchDto) {
+  async create (data: CreateMatchDto){
     const result = await this.prisma.match.create({data})
     return result
   }
+  
   async update(id: number, data: UpdateMatchDto) {
     const result = await this.prisma.match.update({
       data: data,
