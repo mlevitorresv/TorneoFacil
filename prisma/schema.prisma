@@ -57,7 +57,6 @@ model Match {
   id           Int      @id @default(autoincrement())
   state        MatchState
   day          DateTime
-  time         DateTime
   localGoals   Int
   visitorGoals Int
   winner       Team?    @relation("Winner", fields: [winnerId], references: [id])

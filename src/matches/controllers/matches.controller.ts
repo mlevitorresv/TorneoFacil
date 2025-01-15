@@ -1,5 +1,7 @@
-import { Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { MatchesService } from '../services/matches.service';
+import { CreateMatchDto } from '../dto/create-match.dto';
+import { UpdateMatchDto } from '../dto/update-match.dto';
 
 @Controller('matches')
 export class MatchesController {
@@ -11,21 +13,21 @@ export class MatchesController {
     }
     @Get(':id')
     getOne( @Param() params ) {
-        return this.matchesService.getOne(params.id);
+        return this.matchesService.getOne(parseInt(params.id));
     }
 
     @Post()
-    create() {
-        return this.matchesService.create();
+    create(@Body() data: CreateMatchDto) {
+        return this.matchesService.create(data);
     }
 
     @Delete(':id')
     delete( @Param() params ) {
-        return this.matchesService.delete(params.id);
+        return this.matchesService.delete(parseInt(params.id));
     }
 
     @Put(':id')
-    update( @Param() params ){
-        return this.matchesService.update(params.id);
+    update( @Param() params, @Body() data: UpdateMatchDto ){
+        return this.matchesService.update(parseInt(params.id), data);
     }
 }
