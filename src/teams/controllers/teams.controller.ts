@@ -12,7 +12,7 @@ export class TeamsController {
         return this.teamsService.getAll()
     }
     @Get(':id')
-    getOne( @Param() params ) {
+    getOne(@Param() params) {
         return this.teamsService.getOne(parseInt(params.id))
     }
 
@@ -22,12 +22,12 @@ export class TeamsController {
     }
 
     @Delete(':id')
-    delete( @Param() params ) {
+    delete(@Param() params) {
         return this.teamsService.delete(parseInt(params.id))
     }
 
     @Put(':id')
-    update( @Param() params, @Body() data: UpdateTeamDto ){
+    update(@Param() params, @Body() data: UpdateTeamDto) {
         return this.teamsService.update(parseInt(params.id), data)
     }
 }

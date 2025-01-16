@@ -5,7 +5,7 @@ import { UpdatePlayerDto } from '../dto/update-player.dto';
 
 @Injectable()
 export class PlayersService {
-  constructor(private readonly prisma: PrismaService){}
+  constructor(private readonly prisma: PrismaService) { }
 
 
   async getAll() {
@@ -32,7 +32,7 @@ export class PlayersService {
   }
 
   async create(data: CreatePlayerDto) {
-    const result = await this.prisma.player.create({data})
+    const result = await this.prisma.player.create({ data })
     return result
   }
 

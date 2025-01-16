@@ -14,7 +14,7 @@ export class TeamsService {
   }
   async getOne(id: number) {
     const result = await this.prisma.team.findUnique({
-      where:{
+      where: {
         id: id
       }
     })
@@ -29,7 +29,7 @@ export class TeamsService {
     return result
   }
   async create(data: CreateTeamDto) {
-    const result = await this.prisma.team.create({data})
+    const result = await this.prisma.team.create({ data })
     return result
   }
   async update(id: number, data: UpdateTeamDto) {

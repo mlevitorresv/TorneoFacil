@@ -1,5 +1,5 @@
 // src/match/dto/create-match.dto.ts
-import { IsEnum, IsInt, IsOptional, IsDateString, Min, Max } from 'class-validator';
+import { IsEnum, IsInt, IsOptional, IsDateString, Min } from 'class-validator';
 import { MatchState } from '@prisma/client';  // Importar el enum desde Prisma si es que lo definiste allí
 
 export class CreateMatchDto {
